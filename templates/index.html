@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block home %}active{% endblock home %}
+{% block title %}Tech Storm{% endblock title %}
+
+{% block content %}
+<div class="weekly-deals-container py-5">
+    <div class="main-text text-center">
+        <h1>Weekly Deals</h1>
+        <h3>Find the perfect gift this holiday season</h3>
+    </div>
+
+    <div class="product-display">
+        <button class="btn control-prev">
+            <i class="bi bi-caret-left"></i>
+        </button>
+        <div class="product rounded-4">
+            <div class="product-img">
+                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
+            </div>
+            <div class="product-text">
+                <h4>Product Title</h4>
+                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
+            </div>
+        </div>
+        <div class="product rounded-4">
+            <div class="product-img">
+                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
+            </div>
+            <div class="product-text">
+                <h4>Product Title</h4>
+                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
+            </div>
+        </div>
+        <div class="product rounded-4">
+            <div class="product-img">
+                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
+            </div>
+            <div class="product-text">
+                <h4>Product Title</h4>
+                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
+            </div>
+        </div>
+        <div class="product rounded-4">
+            <div class="product-img">
+                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
+            </div>
+            <div class="product-text">
+                <h4>Product Title</h4>
+                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
+            </div>
+        </div>
+        <button class="btn control-next">
+            <i class="bi bi-caret-right"></i>
+        </button>
+    </div>
+</div>
+
+<div class="body-container">
+    <div class="navside">
+        <a href="#" class="btn nav-btn">Computer</a>
+        <a href="#" class="btn nav-btn">Electronics</a>
+        <a href="#" class="btn nav-btn">Gaming</a>
+        <a href="#" class="btn nav-btn">Office</a>
+        <a href="#" class="btn nav-btn">Networking</a>
+        <a href="#" class="btn nav-btn">Theater</a>
+        <a href="#" class="btn nav-btn">Toys</a>
+        <a href="#" class="btn nav-btn">Software</a>
+        <a href="#" class="btn nav-btn">Audio & Video</a>
+    </div>
+    <div class="promo-container mt-3">
+        <div class="promo">
+            <div class="promo-text">
+                <p>Bundle up this season</p>
+                <h2>Save on PC bundles</h2>
+            </div>
+            <img src="{% static 'img/placeholder.jpg' %}" alt="pc-promo">
+        </div>
+
+        <div class="articles">
+            <h4>Lorem Ipsum Dolor</h4>
+            <p class="text-muted">Aenean consectetur condimentum tristique. Nam hendrerit urna ex, non pretium erat pellentesque eget. Sed ut risus nec augue sagittis convallis.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    
+</div>
+{% endblock content %}
