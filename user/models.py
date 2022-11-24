@@ -10,12 +10,14 @@ class User(AbstractUser):
     base_role = Role.MANAGER
     role = models.CharField(max_length=50, choices=Role.choices)
     email = models.EmailField(max_length=254)
+    staff_status = True
 
     REQUIRED_FIELDS = ['role', 'email']
 
     def save(self, *args, **kwargs):
         if not self.pk:
             self.role = self.base_role
+            self.is_staff = self.staff_status
             return super().save(*args, **kwargs)
 
 class CustomerManager(BaseUserManager):
@@ -26,6 +28,7 @@ class CustomerManager(BaseUserManager):
 class Customer(User):
     base_role = User.Role.CUSTOMER
     customer = CustomerManager
+    staff_status = False
 
     class Meta:
         proxy = True
