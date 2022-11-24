@@ -4,6 +4,28 @@
 /* -----------------
         GLOBAL
 ------------------*/
+body {
+    min-height: 100vh;
+}
+
+div.main-nav {
+    height: 10vh;
+}
+
+div.content {
+    min-height: 75.3vh;
+}
+
+
+/* -----------------
+        UTILITIES
+------------------*/
+@media (max-width: 768px) {
+    .w-md-100 {
+        width: 100% !important;
+    }
+}
+
 
 /* -----------------
         NAVBAR

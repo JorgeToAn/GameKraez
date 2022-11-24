@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center page-title mb-5">Logged Out</h1>
+    <p class="text-center">You have succesfully logged out from Tech Storm, hope to see you back soon!</p>
+    <p class="text-center"><a href="{% url 'login' %}" class="link-primary">Click here</a> to go back to the login page.</p>
+</div>
+{% endblock content %}
