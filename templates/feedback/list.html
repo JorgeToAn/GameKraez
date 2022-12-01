@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center page-title mb-5">Feedback</h1>
+    <div class="list-container">
+        {% if feedback_list %}
+            {% for feedback in feedback_list %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Feedback by {{ feedback.first_name }}</h5>
+                        <h6 class="card-subtitle">Submitted on {{ feedback.created_on }}</h6>
+                        <p class="card-text">{{ feedback.comment }}</p>
+                        <a href="{% url 'feedback_detail' feedback.id %}" class="card-link">More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+        <h4 class="text-center">Nothing to review</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

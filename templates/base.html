@@ -48,6 +48,7 @@
                                     {% if user.is_staff %}
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
                                     <li><a class="dropdown-item" href="{% url 'manager_signup' %}">Create Manager</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'feedback_list' %}">Review Feedback</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     {% endif %}
                                     <li><a class="dropdown-item" href="{% url 'password_change' %}">Password Change</a></li>
@@ -78,6 +79,7 @@
         <div class="footer-links">
             <a href="#" class="nav-link">Terms and conditions</a>
             <a href="#" class="nav-link">Privacy</a>
+            <a href="{% url 'feedback_new' %}" class="nav-link">Submit feedback</a>
         </div>
         <div>
             <p>Mark Ortiz & Jorge Tostado, 2022</p>
