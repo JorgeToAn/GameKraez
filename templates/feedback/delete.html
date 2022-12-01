@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Are you sure?{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center page-title mb-5">Delete this feedback?</h1>
+    <div class="text-center">
+        <h4 class="text-danger">You won't be able to recover it afterwards!</p>
+        <a href="{% url 'feedback_delete' feedback.id %}" class="btn btn-dark">Delete <i class="bi bi-check"></i></a>
+        <a href="{% url 'feedback_detail' feedback.id %}" class="btn btn-danger">Cancel <i class="bi bi-x"></i></a>
+    </div>
+</div>
+{% endblock content %}

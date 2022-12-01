@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback Detail{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center page-title mb-5">Feedback Detail</h1>
+    <h5 class="text-center text-muted">Submitted by {{ feedback.first_name }} {{ feedback.last_name }}</h5>
+    <h6 class="text-center text-muted">Submitted on {{ feedback.created_on }}</h6>
+    <div class="my-3">
+        <p class="text-muted">Email: {{ feedback.email }}</p>
+        <p class="text-muted">Score: {{ feedback.score }}</p>
+        <p>{{ feedback.comment }}</p>
+    </div>
+    <a href="{% url 'feedback_delete' feedback.id %}" class="btn btn-danger">Delete</a>
+</div>
+{% endblock content %}
