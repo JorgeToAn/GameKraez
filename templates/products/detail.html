@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.product_name }}{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="product_detail">
+       <div class="product_detail_header d-flex flex-row">
+            <div class="product-detail-img me-5">
+                <img src="{{ product.image.url }}" alt="{{ product.product_name }}" class="img-fluid">
+            </div>
+            <div class="product-detail-primary">
+                <h1 class="page-title">{{ product.product_name }}</h1>
+                <div class="product-detail-rating">
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+                <h3>${{ product.price }}</h3>
+                <h4 class="mt-5">About this product</h4>
+                <p>{{ product.description }}</p>
+                <button class="btn btn-outline-warning">Add to cart</button>
+            </div>
+       </div>
+    </div>
+</div>
+{% endblock content %}

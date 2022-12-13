@@ -34,7 +34,7 @@ class Product(models.Model):
 
     product_name = models.CharField(max_length=128)
     description = models.TextField()
-    image = models.ImageField(upload_to='uploads/products')
+    image = models.ImageField(upload_to='products/')
     price = models.DecimalField(decimal_places=2, max_digits=10, validators=[validate_price])
     category = models.CharField(choices=CATEGORY, max_length=80)
     created_on = models.DateTimeField(auto_now_add=True)

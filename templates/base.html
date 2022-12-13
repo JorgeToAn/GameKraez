@@ -37,7 +37,7 @@
                                 <a class="nav-link" href="#"><i class="bi bi-geo-alt"></i> <span>San Diego, CA</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% block catalog %}{% endblock catalog %}" href="#"><i class="bi bi-shop"></i> <span>Catalog</span></a>
+                                <a class="nav-link {% block catalog %}{% endblock catalog %}" href="{% url 'catalog' %}"><i class="bi bi-shop"></i> <span>Catalog</span></a>
                             </li>
                             {% if user.is_authenticated %}
                             <li class="nav-item dropdown">

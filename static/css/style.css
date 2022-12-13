@@ -296,6 +296,36 @@ div.receipt h4{
     }
 }
 
+/*------------------
+    CATALOG
+------------------*/
+div.filter-container{
+    border: 0.5px dotted rgb(14, 57, 71);
+}
+
+div.products-container{
+    border: 0.5px solid pink;
+}
+
+div.product-image-container{
+    height: 150px;
+    align-items: center;
+}
+
+div.product-image-container img{
+    display: block;
+    width: auto;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*------------------
+    PRODUCT
+------------------*/
+div.product-detail-img{
+    width: 350px;
+}
 
 /*------------------
     UTILITIES
