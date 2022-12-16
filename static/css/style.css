@@ -8,12 +8,12 @@ body {
     min-height: 100vh;
 }
 
-div.main-nav {
-    height: 10vh;
-}
+/*div.main-nav {
+    height: 9vh;
+}*/
 
 div.content {
-    min-height: 75.3vh;
+    min-height: 78.6vh;
 }
 
 
@@ -338,4 +338,8 @@ div.product-detail-img{
 .section-title{
     font-family: 'Poppins', serif;
     font-weight: 700;
+}
+
+a.product-link:hover{
+    color: rgb(0, 110, 255) !important;
 }

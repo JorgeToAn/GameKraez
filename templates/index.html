@@ -15,42 +15,17 @@
         <button class="btn control-prev">
             <i class="bi bi-caret-left"></i>
         </button>
-        <div class="product rounded-4">
-            <div class="product-img">
-                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
+        {% for product in latest_products %}
+            <div class="product rounded-4">
+                <div class="product-img">
+                    <img src="{{ product.image.url }}" alt="placeholder">
+                </div>
+                <div class="product-text">
+                    <h4><a href="{% url 'product_detail' product.id %}" class="text-reset text-decoration-none product-link">{{ product.product_name }}</a></h4>
+                    <p class="text-muted">{{ product.description }}</p>
+                </div>
             </div>
-            <div class="product-text">
-                <h4>Product Title</h4>
-                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
-            </div>
-        </div>
-        <div class="product rounded-4">
-            <div class="product-img">
-                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
-            </div>
-            <div class="product-text">
-                <h4>Product Title</h4>
-                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
-            </div>
-        </div>
-        <div class="product rounded-4">
-            <div class="product-img">
-                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
-            </div>
-            <div class="product-text">
-                <h4>Product Title</h4>
-                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
-            </div>
-        </div>
-        <div class="product rounded-4">
-            <div class="product-img">
-                <img src="{% static 'img/placeholder2.png' %}" alt="placeholder">
-            </div>
-            <div class="product-text">
-                <h4>Product Title</h4>
-                <p class="text-muted">Aenean consectetur odio in condimentum tristique. Nam hendrerit urnaex.</p>
-            </div>
-        </div>
+        {% endfor %}
         <button class="btn control-next">
             <i class="bi bi-caret-right"></i>
         </button>
@@ -59,15 +34,15 @@
 
 <div class="body-container">
     <div class="navside">
-        <a href="#" class="btn nav-btn">Computer</a>
-        <a href="#" class="btn nav-btn">Electronics</a>
-        <a href="#" class="btn nav-btn">Gaming</a>
-        <a href="#" class="btn nav-btn">Office</a>
-        <a href="#" class="btn nav-btn">Networking</a>
-        <a href="#" class="btn nav-btn">Theater</a>
-        <a href="#" class="btn nav-btn">Toys</a>
-        <a href="#" class="btn nav-btn">Software</a>
-        <a href="#" class="btn nav-btn">Audio & Video</a>
+        <a href="{% url 'catalog' %}?category=computer" class="btn nav-btn">Computer</a>
+        <a href="{% url 'catalog' %}?category=electronics" class="btn nav-btn">Electronics</a>
+        <a href="{% url 'catalog' %}?category=gaming" class="btn nav-btn">Gaming</a>
+        <a href="{% url 'catalog' %}?category=office" class="btn nav-btn">Office</a>
+        <a href="{% url 'catalog' %}?category=networking" class="btn nav-btn">Networking</a>
+        <a href="{% url 'catalog' %}?category=theater" class="btn nav-btn">Theater</a>
+        <a href="{% url 'catalog' %}?category=toys" class="btn nav-btn">Toys</a>
+        <a href="{% url 'catalog' %}?category=software" class="btn nav-btn">Software</a>
+        <a href="{% url 'catalog' %}?category=audio & video" class="btn nav-btn">Audio & Video</a>
     </div>
     <div class="promo-container mt-3">
         <div class="promo">
