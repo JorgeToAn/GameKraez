@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'django_countries',
     'pages',
     'user',
     'feedback',
