@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block catalog %}active{% endblock catalog %}
+{% block title %}Catalog{% endblock title %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <h1 class="text-center page-title mb-5">Catalog</h1>
+    <div class="row">
+        <div class="filter-container col-3">
+            <h4 class="text-center">Filters</h4>
+            <form method="get">
+                <div class="mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Product name">
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="amount">Price range</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="amount" readonly class="form-control-plaintext">
+                        </div>
+                    </div>
+                    <input type="text" class="sliderValue visually-hidden" data-index="0" value="0" name="min"/>
+                    <input type="text" class="sliderValue visually-hidden" data-index="1" value="5000" name="max"/>
+                    <div id="slider"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="category">Category</label>
+                    <select class="form-select" aria-label="Select category" name="category" id="category">
+                        <option selected value="">All</option>
+                        <option value="computer">Computer</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="office">Office</option>
+                        <option value="networking">Networking</option>
+                        <option value="theater">Theater</option>
+                        <option value="toys">Toys</option>
+                        <option value="software">Software</option>
+                        <option value="audio & video">Audio & Video</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="order">Order by price</label>
+                    <select class="form-select" aria-label="Select order" name="order" id="order">
+                        <option selected value="">No</option>
+                        <option value="price">Ascending</option>
+                        <option value="-price">Descending</option>
+                    </select>
+                </div>
+                <input type="submit" value="Filter" class="w-100 btn btn-success text-center">
+            </form>
+        </div>
+
+        <div class="products-container col-9">
+            {% if product_list %}
+                {% for product in page_obj %}
+                    <div class="product-card row mb-3 py-3">
+                        <div class="product-image-container col-3">
+                            <img src="{{ product.image.url }}" alt="{{ product.product_name }}">
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col">
+                                    <h2 class="product-name"><a class="text-reset text-decoration-none product-link" href="{% url 'product_detail' product.id %}">{{ product.product_name }}</a></h4>
+                                    <h6>{{ product.get_category_display }}</h6>
+                                    <p class="text-muted">{{ product.description }}</p>
+                                </div>
+                                <div class="col">
+                                    <h3>${{ product.price }}</h6>
+                                    <button data-product="{{ product.id }}" data-action="add" data-user="{{ request.user }}" class="btn btn-outline-warning add-btn update-cart">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                {% endif %}
+    
+                {% for page in page_obj.paginator %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page.number }}">{{ page.number }}</a></li>
+                {% endfor %}
+    
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock content %}

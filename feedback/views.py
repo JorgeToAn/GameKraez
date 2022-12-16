@@ -13,7 +13,7 @@ class FeedbackListView(ListView, LoginRequiredMixin, UserPassesTestMixin):
         user = User.objects.filter(pk=self.request.user.id).get()
         return user.role == User.Role.MANAGER
 
-class FeedbackDetailView(DetailView):
+class FeedbackDetailView(DetailView, LoginRequiredMixin, UserPassesTestMixin):
     template_name: str='feedback/detail.html'
     model = Feedback
 
@@ -21,12 +21,12 @@ class FeedbackDetailView(DetailView):
         user = User.objects.filter(pk=self.request.user.id).get()
         return user.role == User.Role.MANAGER
 
-class FeedbackCreateView(CreateView):
+class FeedbackCreateView(CreateView, LoginRequiredMixin, UserPassesTestMixin):
     template_name: str='feedback/new.html'
     model = Feedback
     fields = ['first_name', 'last_name', 'email', 'score', 'comment']
 
-class FeedbackDeleteView(DeleteView):
+class FeedbackDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     template_name: str='feedback/delete.html'
     model = Feedback
     success_url = reverse_lazy('feedback_list')
