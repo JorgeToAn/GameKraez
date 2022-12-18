@@ -4,16 +4,18 @@
 
 
 {% block content %}
-<div class="review-detail">
-<h1>{{ review.title }}</h1>
-<h3>{{ review.subtitle }}</h3>
-<strong>Created by: {{ review.author }} | On {{ review.created_on }}</strong>
-<p>{{ review.body }}</p>
-{% if user == review.author %}
-<p class ="author-options">
-    <a href="{% url 'edit' review.id %}" class="card-link"><i class="btn btn-primary bi bi-pencil-square"></i></a>
-    <a href="{% url 'delete' review.id %}" class="card-link"><i class="btn btn-danger bi bi-trash3-fill"></i></a>
-</p>
-{% endif %}
+<div class="container my-5">
+    <div class="review-detail">
+        <h1>{{ review.title }}</h1>
+        <h3>{{ review.subtitle }}</h3>
+        <strong>Created by: {{ review.author }} | On {{ review.created_on }}</strong>
+        <p>{{ review.body }}</p>
+        {% if user == review.author %}
+        <p class ="author-options">
+            <a href="{% url 'update_review' review.id %}" class="card-link"><i class="btn btn-primary bi bi-pencil-square"></i></a>
+            <a href="{% url 'delete_review' review.id %}" class="card-link"><i class="btn btn-danger bi bi-trash3-fill"></i></a>
+        </p>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

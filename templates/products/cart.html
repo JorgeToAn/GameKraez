@@ -5,58 +5,59 @@
 
 {% block content %}
     <div class="cart-container container-fluid my-5 row">
+        {% if items %}
         <div class="product-list mx-5 my-3 col-7">
             <h2 class="section-title">Your Shopping Cart ({{ order.get_quantity }})</h2>
-            <div class="products-container">
+            
                 {% for item in items %}
-                    <div class="product-card row mb-3 py-3">
-                        <div class="product-image-container col-3">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.product_name }}">
-                        </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col text-truncate">
-                                    <h2 class="product-name"><a class="text-reset text-decoration-none product-link" href="{% url 'product_detail' item.product.id %}">{{ item.product.product_name }}</a></h4>
-                                    <h6>{{ item.product.get_category_display }}</h6>
-                                    <p class="text-muted">{{ item.product.description }}</p>
-                                </div>
-                                <div class="col-3">
-                                    <h3>Quantity</h3>
-                                    <div class="input-group mb-3">
-                                        <button data-product="{{ item.product.id }}" data-action="remove" data-user="{{ request.user }}" class="btn btn-outline-secondary update-cart"><i class="bi bi-caret-left-fill"></i></button>
-                                        <input type="text" class="form-control" value="{{ item.quantity }}" readonly disabled>
-                                        <button data-product="{{ item.product.id }}" data-action="add" data-user="{{ request.user }}" class="btn btn-outline-secondary update-cart"><i class="bi bi-caret-right-fill"></i></button>
+                <div class="products-container">
+                        <div class="product-card row mb-3 py-3">
+                            <div class="product-image-container col-3">
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.product_name }}">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col text-truncate">
+                                        <h2 class="product-name"><a class="text-reset text-decoration-none product-link" href="{% url 'product_detail' item.product.id %}">{{ item.product.product_name }}</a></h4>
+                                        <h6>{{ item.product.get_category_display }}</h6>
+                                        <p class="text-muted">{{ item.product.description }}</p>
                                     </div>
-                                    <button data-product="{{ item.product.id }}" data-action="delete" data-user="{{ request.user }}" class="btn btn-danger w-100 update-cart">Remove</button>
-                                </div>
-                                <div class="col">
-                                    <h4>Price: ${{ item.product.price }}</h4>
-                                    <h4>Total: ${{ item.get_total }}</h4>
+                                    <div class="col-3">
+                                        <h3>Quantity</h3>
+                                        <div class="input-group mb-3">
+                                            <button data-product="{{ item.product.id }}" data-action="remove" data-user="{{ request.user }}" class="btn btn-outline-secondary update-cart"><i class="bi bi-caret-left-fill"></i></button>
+                                            <input type="text" class="form-control" value="{{ item.quantity }}" readonly disabled>
+                                            <button data-product="{{ item.product.id }}" data-action="add" data-user="{{ request.user }}" class="btn btn-outline-secondary update-cart"><i class="bi bi-caret-right-fill"></i></button>
+                                        </div>
+                                        <button data-product="{{ item.product.id }}" data-action="delete" data-user="{{ request.user }}" class="btn btn-danger w-100 update-cart">Remove</button>
+                                    </div>
+                                    <div class="col">
+                                        <h4>Price: ${{ item.product.price }}</h4>
+                                        <h4>Total: ${{ item.get_total }}</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% empty %}
-                <div class="text-center my-5">
-                    <h2>Your cart is empty...</h2>
-                    <h5>Head on to the catalog to check out all our products!</h5>
-                    <a href="{% url 'catalog' %}" class="btn btn-success">Browse catalog</a>
+                        <div class="summary col-5">
+                            <h2 class="section-title">Summary</h2>
+                            <div class="receipt">
+                                <p>Item(s): ${{ order.get_subtotal | floatformat:2 }}</p>
+                                <p>Tax: ${{ order.get_tax | floatformat:2 }}</p>
+                                <h4>Total: ${{ order.get_total | floatformat:2 }}</h4>
+                            </div>
+                            <div class="d-grid gap-3 payment">
+                                <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to payment</a>
+                            </div>
+                        </div>
                 </div>
                 {% endfor %}
-            </div>
         </div>
-        {% if items %}
-            <div class="summary col-5">
-                <h2 class="section-title">Summary</h2>
-                <div class="receipt">
-                    <p>Item(s): ${{ order.get_subtotal | floatformat:2 }}</p>
-                    <p>Tax: ${{ order.get_tax | floatformat:2 }}</p>
-                    <h4>Total: ${{ order.get_total | floatformat:2 }}</h4>
-                </div>
-                <div class="d-grid gap-3 payment">
-                    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to payment</a>
-                </div>
-            </div>
+        {% else %}
+        <div class="text-center my-5">
+            <h2>Your cart is empty...</h2>
+            <h5>Head on to the catalog to check out all our products!</h5>
+            <a href="{% url 'catalog' %}" class="btn btn-success">Browse catalog</a>
+        </div>
         {% endif %}
     </div>
 {% endblock content %}
