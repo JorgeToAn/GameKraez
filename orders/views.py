@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from .models import Product, Order, OrderProduct
 from payment.models import CheckoutAddress, Payment
+from reviews.models import Review
 import datetime
 import json
 
@@ -36,6 +37,13 @@ class CatalogView(ListView):
 class ProductDetailView(DetailView):
     template_name: str='products/detail.html'
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.get_object()
+        context['reviews'] = product.review_set.all()[:3]
+
+        return context
 
 class CartView(LoginRequiredMixin, TemplateView):
     template_name: str='products/cart.html'

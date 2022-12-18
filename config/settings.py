@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'feedback',
     'orders',
     'payment',
+    'reviews',
 ]
 
 MIDDLEWARE = [

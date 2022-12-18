@@ -22,8 +22,29 @@
                 <h4 class="mt-5">About this product</h4>
                 <p>{{ product.description }}</p>
                 <button data-product="{{ product.id }}" data-action="add" data-user="{{ request.user }}" class="btn btn-outline-warning add-btn update-cart">Add to cart</button>
+                <a href="{% url 'create_review' product.id %}" class="btn btn-primary">Create Review</a>
             </div>
        </div>
     </div>
+    {% if reviews %}
+        <div class="product-reviews">
+            <h3 class="fw-bold">Reviews for this product</h3>
+            {% for review in reviews %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ review.score }} | {{ review.author }} in {{ review.created_on }}</h6>
+                        <p class="card-text">{{ review.body }}</p>
+                        {% if user == review.author %}
+                            <div class ="author-options">
+                                <a href="{% url 'update_review' review.id %}" class="card-link"><i class="btn btn-primary bi bi-pencil-square"></i></a>
+                                <a href="{% url 'delete_review' review.id %}" class="card-link"><i class="btn btn-danger bi bi-trash3-fill"></i></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>
 {% endblock content %}
