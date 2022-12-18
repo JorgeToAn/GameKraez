@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center page-title mb-5">Shipping Info</h1>
+    <div class="form-container container w-50 w-md-100">
+        <form method="post" id="form">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form|crispy }}
+            </div>
+            <div class="container px-0 d-grid mb-3 w-50 w-md-100 gap-2">
+                <input type="submit" value="Confirm payment" class="btn btn-primary" id="make-payment">
+                <a href="{% url 'cart' %}" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let form = document.getElementById("form");
+
+    form.addEventListener('submit', function(e){
+	    	e.preventDefault()
+	    	console.log('Form Submitted...')
+	})
+
+    document.getElementById("make-payment").addEventListener("click", function(e){
+	    	submitFormData();
+	})
+    
+    function submitFormData(){
+	    	console.log("Payment button clicked")
+
+			let shippingInfo = {
+				"street_address":null,
+                "apartment_address":null,
+                "city":null,
+                "country":null,
+                "zip":null
+			}
+
+			shippingInfo.street_address = form.street_address.value
+            shippingInfo.apartment_address = form.apartment_address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.country = form.city.value
+            shippingInfo.zip = form.zip.value
+
+	    	console.log('Shipping Info:', shippingInfo)
+
+	    	var url = "/process_order/"
+	    	fetch(url, {
+	    		method:'POST',
+	    		headers:{
+	    			'Content-Type':'application/json',
+	    			'X-CSRFToken':csrftoken,
+	    		}, 
+	    		body:JSON.stringify({'shipping':shippingInfo}),
+	    		
+	    	})
+	    	.then((response) => response.json())
+	    	.then((data) => {
+				console.log('Success:', data);
+				alert('Transaction completed');  
+
+				window.location.href = "{% url 'index' %}"
+			})
+	    }
+</script>
+{% endblock content %}

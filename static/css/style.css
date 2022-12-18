@@ -18,7 +18,7 @@ div.content {
 
 
 /* -----------------
-        UTILITIES
+        @MEDIA
 ------------------*/
 @media (max-width: 768px) {
     .w-md-100 {
@@ -229,38 +229,8 @@ label.form-label{
 }
 
 /*--------------------
-    CHECKOUT
+    CART
 --------------------*/
-div.checkout-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    min-height: 83.8vh;
-}
-
-
-div.product-list{
-    display: flex;
-    flex-direction: column;
-    margin: 1em 5em;
-}
-
-div.product-list-item{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-div.product-item-text{
-    margin: 1em 0;
-}
-
-div.product-item-price{
-    text-align: center;
-    margin: 4em 0;
-}
-
 div.product-item-img{
     max-width: 10em;
 }
@@ -325,6 +295,10 @@ div.product-image-container img{
 ------------------*/
 div.product-detail-img{
     width: 350px;
+}
+
+div.product-header{
+    height: 50%;
 }
 
 /*------------------
