@@ -9,7 +9,7 @@ import json
 
 class CatalogView(ListView):
     template_name: str='products/catalog.html'
-    paginate_by = 10
+    paginate_by = 5
     model = Product
 
     def get_queryset(self):
