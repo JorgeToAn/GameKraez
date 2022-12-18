@@ -1,27 +1,11 @@
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, View
-from django.contrib import messages 
+from django.db.models.functions import Now
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import (
-    Product, 
-    Order, 
-    OrderProduct
-)
-
-# Create your views here.
-# class OrderSummaryView(LoginRequiredMixin, View):
-#     def get(self, *args, **kwargs):
-
-#         try:
-#             order = Order.objects.get(user=self.request.user, ordered=False)
-#             context = {
-#                 'object' : order
-#             }
-#             return render(self.request, 'order_summary.html', context)
-#         except ObjectDoesNotExist:
-#             messages.error(self.request, "No orders found :(")
-#             return redirect("/")
+from django.http import JsonResponse
+from .models import Product, Order, OrderProduct
+from payment.models import CheckoutAddress, Payment
+import datetime
+import json
 
 class CatalogView(ListView):
     template_name: str='products/catalog.html'
@@ -52,3 +36,72 @@ class CatalogView(ListView):
 class ProductDetailView(DetailView):
     template_name: str='products/detail.html'
     model = Product
+
+class CartView(LoginRequiredMixin, TemplateView):
+    template_name: str='products/cart.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order, created = Order.objects.get_or_create(user=self.request.user, ordered=False)
+        context['order'] = order
+        context['items'] = order.orderproduct_set.all()
+
+        return context
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+
+    customer = request.user
+    product = Product.objects.get(pk=productId)
+    order, created = Order.objects.get_or_create(
+        user=customer,
+        ordered=False
+    )
+    orderProduct, created = OrderProduct.objects.get_or_create(
+        product=product,
+        order=order
+    )
+
+    if action == 'add':
+        orderProduct.quantity = (orderProduct.quantity + 1)
+    elif action == 'remove':
+        orderProduct.quantity = (orderProduct.quantity - 1)
+    elif action == 'delete':
+        orderProduct.quantity = 0
+    
+    orderProduct.save()
+
+    if orderProduct.quantity <= 0:
+        orderProduct.delete()
+
+    return JsonResponse('Item was added', safe=False)
+
+def processOrder(request):
+    if request.user.is_authenticated:
+        data = json.loads(request.body)
+        customer = request.user
+        data_shipping = data['shipping']
+        transaction_id = f"{customer.username[:10]}-{datetime.datetime.now().timestamp()}"
+
+        order, created = Order.objects.get_or_create(user=customer, ordered=False)
+        
+        payment = Payment.objects.create(transaction_id=transaction_id)
+
+        shipping, created = CheckoutAddress.objects.get_or_create(
+            street_address=data_shipping['street_address'],
+            apartment_address=data_shipping['apartment_address'],
+            city=data_shipping['city'],
+            country=data_shipping['country'],
+            zip=data_shipping['zip']
+        )
+
+        order.address = shipping
+        order.payment = payment
+        order.ordered_date = datetime.datetime.now()
+        order.ordered = True
+        order.save()
+        return JsonResponse('Payment confirmed', safe=False)
+    else:
+        return JsonResponse('Payment failed', safe=False)
