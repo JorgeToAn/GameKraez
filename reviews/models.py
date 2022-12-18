@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse 
+from orders.models import Product
 
 # Create your models here.
 class Status(models.Model):
@@ -22,6 +23,12 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.ForeignKey(
         Status, 
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
+    product = models.ForeignKey(
+        Product, 
         on_delete=models.CASCADE,
         blank=True,
         null=True
