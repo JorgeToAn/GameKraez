@@ -6,58 +6,62 @@
 
 {% block content %}
 <div class="weekly-deals-container py-5">
-    <div class="main-text text-center">
-        <h1>Weekly Deals</h1>
-        <h3>Find the perfect gift this holiday season</h3>
+    <div id="carouselExampleIndicators" class="carousel slide w-50 mx-auto">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'img/gaming-promo.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/placeholder.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/placeholder2.png' %}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
     </div>
+</div>
 
-    <div class="product-display">
+<div class="body-container pb-5">
+    <div class="p-5 rounded d-flex flex-column" style="background-color: white;">
+        <h3 class="text-center">Popular</h3>
         {% for product in latest_products %}
-            <div class="product rounded-4 p-3">
-                <div class="product-header">
-                    <div class="product-img">
-                        <img src="{{ product.image.url }}" alt="placeholder">
-                    </div>
-                </div>
-                <div class="product-text text-truncate">
-                    <h4><a href="{% url 'product_detail' product.id %}" class="text-reset text-decoration-none product-link">{{ product.product_name }}</a></h4>
-                    <p class="text-muted text-truncate">${{ product.price }}</p>
-                    <button data-product="{{ product.id }}" data-action="add" data-user="{{ request.user }}" class="btn btn-outline-warning add-btn update-cart">Add to cart</button>
-                </div>
+        <div class="card mb-3 w-50 mx-auto product-card">
+            <img src="{{ product.image.url }}" class="card-img-top w-50 mx-auto" alt="{{ product.product_name }}">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'product_detail' product.id %}" class="text-reset text-decoration-none product-link">{{ product.product_name }}</a></h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-body-secondary">${{ product.price }}</small></p>
+              <button data-product="{{ product.id }}" data-action="add" data-user="{{ request.user }}" class="btn add-btn update-cart">Buy</button>
             </div>
+        </div>
         {% endfor %}
     </div>
-</div>
-
-<div class="body-container">
-    <div class="navside">
-        <a href="{% url 'catalog' %}?category=computer" class="btn nav-btn">Computer</a>
-        <a href="{% url 'catalog' %}?category=electronics" class="btn nav-btn">Electronics</a>
-        <a href="{% url 'catalog' %}?category=gaming" class="btn nav-btn">Gaming</a>
-        <a href="{% url 'catalog' %}?category=office" class="btn nav-btn">Office</a>
-        <a href="{% url 'catalog' %}?category=networking" class="btn nav-btn">Networking</a>
-        <a href="{% url 'catalog' %}?category=theater" class="btn nav-btn">Theater</a>
-        <a href="{% url 'catalog' %}?category=toys" class="btn nav-btn">Toys</a>
-        <a href="{% url 'catalog' %}?category=software" class="btn nav-btn">Software</a>
-        <a href="{% url 'catalog' %}?category=audio & video" class="btn nav-btn">Audio & Video</a>
-    </div>
-    <div class="promo-container mt-3">
-        <div class="promo">
-            <div class="promo-text">
-                <p>Bundle up this season</p>
-                <h2>Save on PC bundles</h2>
+    <div class="p-5 rounded d-flex flex-column" style="background-color: white;">
+        <h3 class="text-center">New & Upcoming</h3>
+        {% for product in latest_products %}
+        <div class="card mb-3 w-50 mx-auto product-card">
+            <img src="{{ product.image.url }}" class="card-img-top w-50 mx-auto" alt="{{ product.product_name }}">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'product_detail' product.id %}" class="text-reset text-decoration-none product-link">{{ product.product_name }}</a></h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-body-secondary">${{ product.price }}</small></p>
+              <button data-product="{{ product.id }}" data-action="add" data-user="{{ request.user }}" class="btn add-btn update-cart">Buy</button>
             </div>
-            <img src="{% static 'img/gaming-promo.png' %}" alt="pc-promo">
         </div>
-
-        <div class="articles">
-            <h4>Lorem Ipsum Dolor</h4>
-            <p class="text-muted">Aenean consectetur condimentum tristique. Nam hendrerit urna ex, non pretium erat pellentesque eget. Sed ut risus nec augue sagittis convallis.</p>
-        </div>
+        {% endfor %}
     </div>
-</div>
-
-<div class="container my-5">
-    
 </div>
 {% endblock content %}
