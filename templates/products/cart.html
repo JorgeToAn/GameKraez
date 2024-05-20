@@ -7,7 +7,7 @@
     <div class="cart-container container-fluid my-5 row">
         <div class="product-list mx-5 my-3 col-7">
             <h2 class="section-title">Your Shopping Cart ({{ order.get_quantity }})</h2>
-            <div class="products-container">
+            <div class="products-container rounded p-4 text-light">
                 {% for item in items %}
                     <div class="product-card row mb-3 py-3">
                         <div class="product-image-container col-3">
@@ -40,7 +40,7 @@
                 <div class="text-center my-5">
                     <h2>Your cart is empty...</h2>
                     <h5>Head on to the catalog to check out all our products!</h5>
-                    <a href="{% url 'catalog' %}" class="btn btn-success">Browse catalog</a>
+                    <a href="{% url 'catalog' %}" class="btn btn-success" style="background-color: #ef233c; border-color: #ef233c;">Browse catalog</a>
                 </div>
                 {% endfor %}
             </div>

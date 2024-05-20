@@ -8,10 +8,6 @@ body {
     min-height: 100vh;
 }
 
-/*div.main-nav {
-    height: 9vh;
-}*/
-
 div.content {
     min-height: 78.6vh;
 }
@@ -30,26 +26,30 @@ div.content {
 /* -----------------
         NAVBAR
 --------------------*/
+.navbar{
+    background-color: #2B2D42;
+}
+
 .navbar-brand{
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
     font-weight: 700;
-    color: #023E8A;
+    color: #ffffff;
 }
 
 .nav-link.active{
-    border-bottom: 1px solid #023E8A;
+    background-color: #EF233C;
+    border-radius: .5rem;
 }
 
-.nav-link span{
-    color: #023E8A;
+.nav-link span, .nav-link i{
+    color: #FFFFFF;
 }
 
 /*------------------
     FOOTER
 ------------------*/
 div.footer{
-    background-color: #413e3e;
+    background-color: #2B2D42;
     color: white;
     padding: 2em;
     display: flex;
@@ -75,7 +75,7 @@ div.footer p{
     WEEKLY DEALS
 -----------------*/
 div.weekly-deals-container{
-    background-color: #ffe10079;
+    background-color: #edf2f4;
 }
 
 div.main-text h1{
@@ -96,6 +96,11 @@ div.product-display{
     align-items: stretch;
     justify-content: space-around;
     /* overflow-x: scroll; */
+}
+
+.product-card{
+    background-color: #2B2D42;
+    color: white;
 }
 
 div.product{
@@ -143,6 +148,8 @@ div.product img{
 div.body-container{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    background-color: #edf2f4;
 }
 
 @media (max-width: 992px){
@@ -271,11 +278,13 @@ div.receipt h4{
 ------------------*/
 div.filter-container{
     border: 0.5px solid rgb(209, 209, 209);
+    background-color: #EF233C;
+    color: white;
 }
 
-/* div.products-container{
-    border: 0.5px solid pink;
-} */
+div.products-container{
+    background-color: #2B2D42;
+}
 
 div.product-image-container{
     height: 150px;
@@ -316,4 +325,9 @@ div.product-header{
 
 a.product-link:hover{
     color: rgb(0, 110, 255) !important;
+}
+
+.add-btn{
+    background-color: #EF233C;
+    color: white;
 }
