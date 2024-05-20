@@ -8,10 +8,6 @@ body {
     min-height: 100vh;
 }
 
-/*div.main-nav {
-    height: 9vh;
-}*/
-
 div.content {
     min-height: 78.6vh;
 }
@@ -30,26 +26,30 @@ div.content {
 /* -----------------
         NAVBAR
 --------------------*/
+.navbar{
+    background-color: #2B2D42;
+}
+
 .navbar-brand{
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
     font-weight: 700;
-    color: #023E8A;
+    color: #ffffff;
 }
 
 .nav-link.active{
-    border-bottom: 1px solid #023E8A;
+    background-color: #EF233C;
+    border-radius: .5rem;
 }
 
-.nav-link span{
-    color: #023E8A;
+.nav-link span, .nav-link i{
+    color: #FFFFFF;
 }
 
 /*------------------
     FOOTER
 ------------------*/
 div.footer{
-    background-color: #413e3e;
+    background-color: #2B2D42;
     color: white;
     padding: 2em;
     display: flex;
